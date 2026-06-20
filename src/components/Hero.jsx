@@ -13,9 +13,8 @@ const Hero = () => {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <h1 className="hero-title">Empower Dreams with <span className="accent-text">ME SHOP</span></h1>
-          <p className="hero-subtitle">Handcrafted treasures delivered with purpose and passion.
-Experience shopping that makes a difference.</p>
+          <h1 className="hero-title">Shop & <span className="accent-text">Empower</span> Young Minds</h1>
+          <p className="hero-subtitle">Every purchase directly supports Mind Empowerment's mission — free mental health resources, workshops, and youth support across India.</p>
           <div className="hero-btns">
             <Link to="/shop" className="primary-btn">Shop Now</Link>
             <Link to="/about" className="secondary-btn">Learn More</Link>

@@ -29,7 +29,7 @@ Experience shopping that makes a difference.</p>
           transition={{ duration: 0.8 }}
         >
           <div className="placeholder-image">
-            <img src="https://images.unsplash.com/photo-1556228720-195a672e8a03?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Hero Placeholder" />
+            <img src="Product_img\28.png" alt="Hero Placeholder" />
           </div>
         </motion.div>
       </div>

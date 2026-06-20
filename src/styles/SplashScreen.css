@@ -19,14 +19,26 @@
   align-items: center;
   gap: 30px;
 }
-
 .splash-logo {
-  width: 120px;
-  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: auto;
+}
+
+.splash-logo .logo {
+  width: 60px;
+  height: 60px;
+}
+
+.splash-logo span {
+  white-space: nowrap;
+}
 }
 
 .splash-text p {
-  color: var(--accent);
+  color: #461711;
   letter-spacing: 5px;
   font-size: 0.8rem;
   margin-bottom: 5px;
@@ -53,5 +65,5 @@
 
 .loader-bar {
   height: 100%;
-  background: var(--accent);
+  background: #461711;
 }

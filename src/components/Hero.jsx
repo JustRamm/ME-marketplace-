@@ -13,8 +13,9 @@ const Hero = () => {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <h1 className="hero-title">Elevate Your Glow with <span className="accent-text">La Luna</span></h1>
-          <p className="hero-subtitle">Premium skincare and wellness essentials delivered straight to your door. Experience the magic of the moon in your daily routine.</p>
+          <h1 className="hero-title">Empower Dreams with <span className="accent-text">ME SHOP</span></h1>
+          <p className="hero-subtitle">Handcrafted treasures delivered with purpose and passion.
+Experience shopping that makes a difference.</p>
           <div className="hero-btns">
             <Link to="/shop" className="primary-btn">Shop Now</Link>
             <Link to="/about" className="secondary-btn">Learn More</Link>

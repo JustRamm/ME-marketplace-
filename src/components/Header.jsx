@@ -38,7 +38,7 @@ const Header = ({ isLoggedIn = false }) => {
 
         <nav className={`nav-links ${isMobileMenuOpen ? 'active' : ''}`}>
           <Link to="/">Home</Link>
-          <Link to="/categories">Categories</Link>
+          <Link to="/categories">Community</Link>
           <Link to="/best-sellers">Best Sellers</Link>
           <Link to="/track-order">Track Order</Link>
         </nav>

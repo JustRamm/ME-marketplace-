@@ -22,9 +22,9 @@ const HomeScreen = () => {
       
       <section className="section categories">
         <div className="container">
-          <h2 className="section-title">Shop by Category</h2>
+          <h2 className="section-title">Shop by Community</h2>
           <div className="category-grid">
-            {['Skincare', 'Wellness', 'Body Care', 'Gifts'].map((cat, i) => (
+            {['Mind Empowered', 'Smrithi', 'Kairali Foundation', 'Fr. Agostino Vicini Special School'].map((cat, i) => (
               <motion.div 
                 key={cat} 
                 className="category-item"

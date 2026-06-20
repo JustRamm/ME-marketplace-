@@ -15,7 +15,7 @@ const CategoriesScreen = () => {
     <div className="section" style={{ paddingTop: '120px' }}>
       <div className="container">
         <BackButton />
-        <h1 className="section-title">Shop by Category</h1>
+        <h1 className="section-title">Shop by Community</h1>
         <div className="category-grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '30px' }}>
           {CATEGORIES.map(cat => (
             <Link to={`/shop?category=${cat.id}`} key={cat.id} className="category-card" style={{ position: 'relative', height: '350px', borderRadius: '15px', overflow: 'hidden', display: 'block' }}>

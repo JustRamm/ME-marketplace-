@@ -31,8 +31,8 @@ const SplashScreen = () => {
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.5, duration: 1 }}
         >
-          <p>EST. 2024</p>
-          <h2>Purely Lunar</h2>
+          <p>EST. 2020</p>
+          <h2>Empowering Communities</h2>
         </motion.div>
         
         <div className="splash-loader">

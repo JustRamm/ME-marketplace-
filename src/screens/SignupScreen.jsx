@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Mail, Lock, User, ArrowRight } from 'lucide-react';
+import { supabase } from '../supabase';
 import BackButton from '../components/BackButton';
 import '../styles/Auth.css';
 
@@ -11,10 +13,45 @@ const SignupScreen = ({ onSignup }) => {
     confirmPassword: ''
   });
 
-  const handleSubmit = (e) => {
+  const navigate=useNavigate();
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Simulate signup
-    onSignup();
+
+    if(formData.password !== formData.confirmPassword){
+      alert("password do not match");
+      return;
+    }
+
+    const { data, error }=await supabase.auth.signUp({
+      email : formData.email,
+      password : formData.password,
+      options: {
+        data:{
+          full_name: formData.name
+        }
+      }
+    })  
+
+    const user = data?.user;
+
+    if(error){
+      alert(error.message);
+      return;
+    }
+    const { error: insertError } = await supabase
+      .schema('marketplace_dataspace')
+      .from('buyers')
+      .insert({
+        id: user.id,
+        name: formData.name
+      });
+
+    if (insertError) {
+      alert(insertError.message);
+      return;
+    }
+    navigate('/login');
   };
 
   return (

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Mail, Lock, ArrowRight } from 'lucide-react';
+import { supabase } from '../supabase';
 import BackButton from '../components/BackButton';
 import '../styles/Auth.css';
 
@@ -8,10 +9,24 @@ const LoginScreen = ({ onLogin }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit =async (e) => {
     e.preventDefault();
-    // Simulate login
+    
+    const {data,error}=
+      await supabase.auth.signInWithPassword({
+        email,
+        password
+      });
+
+    if(error){
+      alert(error.message);
+      return;
+    }
+
+    
+  if (onLogin) {
     onLogin();
+}
   };
 
   return (

@@ -1,32 +1,43 @@
 import React from 'react';
+import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { ShoppingCart, Heart, ShieldCheck, Truck, Star } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 import BackButton from '../components/BackButton';
 import MoonRating from '../components/MoonRating';
 import '../styles/ProductDetail.css';
-
-const MOCK_PRODUCTS = [
-  { id: 1, name: "Lunar Glow Serum", category: "Skincare", price: 45, oldPrice: 60, rating: 5, discount: 25 },
-  { id: 2, name: "Moonlight Mask", category: "Wellness", price: 32, rating: 4 },
-  { id: 3, name: "Stardust Exfoliator", category: "Skincare", price: 28, oldPrice: 35, rating: 5, discount: 20 },
-  { id: 4, name: "Midnight Recovery Oil", category: "Skincare", price: 55, rating: 4 },
-  { id: 5, name: "Celestial Eye Cream", category: "Skincare", price: 38, rating: 5 },
-  { id: 6, name: "Eclipse Cleansing Gel", category: "Wellness", price: 22, rating: 4 },
-  { id: 7, name: "Nebula Night Cream", category: "Skincare", price: 48, rating: 5 },
-  { id: 8, name: "Galaxy Body Butter", category: "Body Care", price: 25, rating: 4 },
-];
+import { supabase } from '../supabase';
 
 const ProductDetailScreen = () => {
+  
   const { id } = useParams();
   const { addToCart } = useCart();
-  const navigate = useNavigate();
+  const [product, setProduct]= useState(null);
   
-  const product = MOCK_PRODUCTS.find(p => p.id === parseInt(id)) || MOCK_PRODUCTS[0];
+  useEffect(()=>{fetchProduct();},[id]);
+
+  async function fetchProduct(){
+    const { data, error } = await supabase
+      .schema('marketplace_dataspace')
+      .from('products')
+      .select('*')
+      .eq('id', id)
+      .single();
+  
+      if (error){
+        console.error(error);
+        return;
+      }
+      setProduct(data);
+  }
 
   const handleAddToCart = () => {
     addToCart(product);
   };
+
+  if (!product) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className="section product-detail-page" style={{ paddingTop: '120px' }}>
@@ -35,7 +46,7 @@ const ProductDetailScreen = () => {
         <div className="detail-grid">
           <div className="detail-images">
             <div className="main-image-placeholder">
-              <img src={product.image || "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"} alt={product.name} />
+              <img src={product.images?.[0] || "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"} alt={product.name} />
             </div>
           </div>
           
@@ -49,7 +60,7 @@ const ProductDetailScreen = () => {
             </div>
             
             <p className="description">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+              {product.description}
             </p>
             
             <div className="selectors">

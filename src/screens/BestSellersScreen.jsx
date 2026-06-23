@@ -1,16 +1,29 @@
 import React from 'react';
+import { useState, useEffect } from 'react';
+import { supabase } from '../supabase';
 import ProductCard from '../components/ProductCard';
 import BackButton from '../components/BackButton';
 import { Trophy } from 'lucide-react';
 
-const MOCK_PRODUCTS = [
-  { id: 1, name: "Lunar Glow Serum", category: "Skincare", price: 45, oldPrice: 60, rating: 5, discount: 25 },
-  { id: 3, name: "Stardust Exfoliator", category: "Skincare", price: 28, oldPrice: 35, rating: 5, discount: 20 },
-  { id: 5, name: "Celestial Eye Cream", category: "Skincare", price: 38, rating: 5 },
-  { id: 7, name: "Nebula Night Cream", category: "Skincare", price: 48, rating: 5 },
-];
-
 const BestSellersScreen = () => {
+
+    const [products, setProducts]= useState([]);
+  
+    useEffect(()=>{fetchProducts();},[]);
+  
+    async function fetchProducts(){
+      const {data, error} = await supabase
+      .schema('marketplace_dataspace')
+      .from('products')
+      .select('*');
+  
+      if (error){
+        console.error(error);
+        return;
+      }
+      setProducts(data);
+    }
+    
   return (
     <div className="section" style={{ paddingTop: '120px' }}>
       <div className="container">
@@ -22,7 +35,7 @@ const BestSellersScreen = () => {
         </div>
         
         <div className="products-grid">
-          {MOCK_PRODUCTS.map(product => (
+          {products.map(product => (
             <ProductCard key={product.id} product={product} />
           ))}
         </div>

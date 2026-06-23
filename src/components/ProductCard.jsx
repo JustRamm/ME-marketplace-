@@ -23,7 +23,7 @@ const ProductCard = ({ product }) => {
   return (
     <div className="product-card">
       <Link to={`/product/${product.id}`} className="product-image">
-        <img src={product.image || 'https://placehold.co/300x400'} alt={product.name} />
+        <img src={product.images?.[0] || 'https://placehold.co/300x400'} alt={product.name} />
         {product.discount && <span className="badge">-{product.discount}%</span>}
         <button className="add-to-cart-overlay" onClick={handleAddToCart}>
           <ShoppingCart size={18} /> Add to Cart

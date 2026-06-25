@@ -14,7 +14,12 @@ const ProductDetailScreen = () => {
   const { addToCart } = useCart();
   const [product, setProduct]= useState(null);
   
-  useEffect(()=>{fetchProduct();},[id]);
+  useEffect(() => {
+    fetchProduct();
+    if (id) {
+      recordProductView(id);
+    }
+  }, [id]);
 
   async function fetchProduct(){
     const { data, error } = await supabase
@@ -30,6 +35,21 @@ const ProductDetailScreen = () => {
       }
       setProduct(data);
   }
+
+  // record product view (user count)
+  const recordProductView = async (productId) => {
+    try {
+      const { error } = await supabase.rpc('increment_view', { 
+        row_id: productId 
+      });
+
+      if (error) {
+        console.error("Error recording view:", error);
+      }
+    } catch (err) {
+      console.error("Unexpected error recording view:", err);
+    }
+  };
 
   const handleAddToCart = () => {
     addToCart(product);

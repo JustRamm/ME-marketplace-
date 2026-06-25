@@ -53,22 +53,22 @@ const AppContent = ({ isLoggedIn, handleLogin, handleSignup, handleLogout }) => 
           <Route path="/wishlist" element={<WishlistScreen />} />
           <Route path="/contact" element={<ContactScreen />} />
           <Route path="/about" element={<AboutScreen />} />
-          
-          <Route 
-            path="/login" 
-            element={isLoggedIn ? <Navigate to="/account" /> : <LoginScreen onLogin={handleLogin} />} 
+
+          <Route
+            path="/login"
+            element={isLoggedIn ? <Navigate to="/account" /> : <LoginScreen onLogin={handleLogin} />}
           />
-          <Route 
-            path="/forgot-password" 
-            element={<ForgotPasswordScreen />} 
+          <Route
+            path="/forgot-password"
+            element={<ForgotPasswordScreen />}
           />
-          <Route 
-            path="/signup" 
-            element={isLoggedIn ? <Navigate to="/account" /> : <SignupScreen onSignup={handleSignup} />} 
+          <Route
+            path="/signup"
+            element={isLoggedIn ? <Navigate to="/account" /> : <SignupScreen onSignup={handleSignup} />}
           />
-          <Route 
-            path="/account" 
-            element={isLoggedIn ? <AccountScreen onLogout={handleLogout} /> : <Navigate to="/login" />} 
+          <Route
+            path="/account"
+            element={isLoggedIn ? <AccountScreen onLogout={handleLogout} /> : <Navigate to="/login" />}
           />
         </Routes>
       </main>
@@ -106,11 +106,11 @@ function App() {
         {loading ? (
           <SplashScreen key="splash" />
         ) : (
-          <AppContent 
-            isLoggedIn={isLoggedIn} 
-            handleLogin={handleLogin} 
-            handleSignup={handleSignup} 
-            handleLogout={handleLogout} 
+          <AppContent
+            isLoggedIn={isLoggedIn}
+            handleLogin={handleLogin}
+            handleSignup={handleSignup}
+            handleLogout={handleLogout}
           />
         )}
       </AnimatePresence>

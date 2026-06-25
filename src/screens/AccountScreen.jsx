@@ -17,7 +17,7 @@ const AccountScreen = ({ onLogout }) => {
                 <p>jane.doe@example.com</p>
               </div>
             </div>
-            
+
             <nav className="account-nav">
               <button className="active"><Package size={18} /> My Orders</button>
               <button><MapPin size={18} /> Addresses</button>
@@ -25,7 +25,7 @@ const AccountScreen = ({ onLogout }) => {
               <button className="logout-btn" onClick={onLogout}><LogOut size={18} /> Logout</button>
             </nav>
           </aside>
-          
+
           <main className="account-content">
             <h2>My Orders</h2>
             <div className="orders-list">
@@ -44,7 +44,7 @@ const AccountScreen = ({ onLogout }) => {
                   <button className="track-btn">Track Order</button>
                 </div>
               </div>
-              
+
               <p className="lorem">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Your order history will appear here.</p>
             </div>
           </main>

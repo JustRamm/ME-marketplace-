@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import {
   Package,
   MapPin,
@@ -8,17 +9,30 @@ import {
   ShoppingBag,
   CreditCard,
   Truck,
+  Bell,
 } from "lucide-react";
 import BackButton from "../components/BackButton";
 import ProductCard from "../components/ProductCard";
+import NotificationInboxTab from "../components/NotificationInboxTab";
 import { supabase } from "../supabase";
 import { useWishlist } from "../context/wishlistContext";
+import { useNotifications } from "../context/NotificationContext";
 import "../styles/Account.css";
 
 const AccountScreen = ({ user, onLogout }) => {
   const [orders, setOrders] = useState([]);
   const [loadingOrders, setLoadingOrders] = useState(true);
-  const [activeTab, setActiveTab] = useState("orders");
+  const [searchParams] = useSearchParams();
+  const [activeTab, setActiveTab] = useState(
+    searchParams.get('tab') || 'orders'
+  );
+  const { unreadCount } = useNotifications();
+
+  // Sync tab if URL param changes (e.g. clicking bell icon)
+  useEffect(() => {
+    const tabFromUrl = searchParams.get('tab');
+    if (tabFromUrl) setActiveTab(tabFromUrl);
+  }, [searchParams]);
 
   const displayName =
     user?.user_metadata?.full_name ||
@@ -107,7 +121,22 @@ const AccountScreen = ({ user, onLogout }) => {
                 Addresses
               </button>
 
-              <button>
+              <button
+                className={activeTab === "notifications" ? "active" : ""}
+                onClick={() => setActiveTab("notifications")}
+                style={{ position: 'relative' }}
+              >
+                <Bell size={18} />
+                Notifications
+                {unreadCount > 0 && (
+                  <span className="sidebar-notif-badge">{unreadCount}</span>
+                )}
+              </button>
+
+              <button
+                className={activeTab === "settings" ? "active" : ""}
+                onClick={() => setActiveTab("settings")}
+              >
                 <Settings size={18} />
                 Settings
               </button>
@@ -290,6 +319,25 @@ const AccountScreen = ({ user, onLogout }) => {
                 )}
               </>
             )}
+            {/* ================= NOTIFICATIONS ================= */}
+
+            {activeTab === "notifications" && (
+              <NotificationInboxTab />
+            )}
+
+            {/* ================= SETTINGS ================= */}
+
+            {activeTab === "settings" && (
+              <div className="settings-tab">
+                <h2>Settings</h2>
+                <div className="orders-empty" style={{ marginTop: '20px' }}>
+                  <Settings size={48} strokeWidth={1.2} />
+                  <h3>Coming Soon</h3>
+                  <p>Account settings and preferences will be available here.</p>
+                </div>
+              </div>
+            )}
+
           </main>
         </div>
       </div>

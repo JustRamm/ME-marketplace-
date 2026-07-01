@@ -68,7 +68,7 @@ const AccountScreen = ({ user, onLogout }) => {
   useEffect(() => {
       fetchOrders();
       fetchAddresses();
-  }, [email]);
+  }, [user]);
 
 const handleAddAddress = async (address) => {
   const { error } = await supabase
@@ -143,7 +143,6 @@ const handleSetDefaultAddress = async (address) => {
   }
 await fetchAddresses();
 };
-   console.log(user.id);
   return (
     <div className="section account-page" style={{ paddingTop: "120px" }}>
       <div className="container">
